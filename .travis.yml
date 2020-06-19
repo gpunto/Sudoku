@@ -1,0 +1,16 @@
+language: java
+
+os: linux
+dist: trusty
+jdk: oraclejdk8
+
+branches:
+  only:
+  - master
+
+script:
+  - "./gradlew --stacktrace jvmTest"
+
+notifications:
+  slack:
+    secure: iXD2HBWg8livDXizCSdhy7dW+OOSQOe+qRGmFiuzZ96p7fHU5sbwBTnehgmUVY2+w8yDdjEapzD4NpdZWH2oQfGiQwOm9DxHRVnXXK9GuQKjd2ahcRixxBPEyFF+PNZLgkNw3TkaaYX8xSFNEZ98XnJD9L4Ft8HDj9l1sT2q4qfN067YYqYIZgWM0u6EaB4mBu3myEl2/23M99X6Xx9X8YiiecTGSf8KNzHIl8bsxC+DRJaXPAs758XHRpZyEKo9DhhYc+J6TOD66q8//Jl03DOqE6hnOQz8BY+dh94XjghllvGWicxOIlPFDZ6QXF0p4aa27T9xrrtDzdEHLMwX72w50/tr1y9hMAwTCa0i5wAifITaGx7VacoZT8ba0G199sV3BY9vPwSvguO6F5+j15iCPTTXVgNYSSoqM5H/rRDMciIR94wPX0Z53ntxvvyW3sKeIHhThQsell0vRbuyHJY205tUc9h34XDU3LN5/PJrgRleKcyiR5L2M1Vk/JOIB67FZLHZrpo4u9jRVX4RHSeMwDrwBaD8p97vD8DfDOhaBDD22tawFMCiLoxlVtZj5yUvUvUyPQ0tokNP33zJpEen5gz2/TKsx/dAvYcuqUsKV3uV7ttt7hAzlNvr4SQ50KmSLwjf34Q//YVzqnEJvYX652vxQgX/wR6iIt4pGzs=
