@@ -1,22 +1,19 @@
 package com.gianmarcodavid.sudoku.rules
 
-import com.gianmarcodavid.sudoku.*
-import kotlin.math.floor
-import kotlin.math.sqrt
+import com.gianmarcodavid.sudoku.Check
+import com.gianmarcodavid.sudoku.Coordinate
+import com.gianmarcodavid.sudoku.Rule
+import com.gianmarcodavid.sudoku.Subject
 
-fun sudoku(size: Int): Rule {
-    val sqrt = sqrt(size.toDouble())
-    require(sqrt == floor(sqrt))
-    val squareSide = sqrt.toInt()
+fun sudoku(rows: Int, columns: Int): Rule {
+    val side = rows * columns
+    val rs = List(side) { row(it, side) }
+    val cs = List(side) { column(it, side) }
+    val bs = List(side) { box(it, rows, columns) }
 
-    val rows = List(size) { row(it, size) }
-    val columns = List(size) { column(it, size) }
-    val squares = List(size) { square(it, squareSide) }
-
-    println(squares.forEach { it.coordinates.map { "(${it.row},${it.col}" } })
     return Rule(
-        rows + columns + squares,
-        and(InRange(1..size), Unique())
+        rs + cs + bs,
+        and(InRange(1..(side * side)), Unique())
     )
 }
 
@@ -26,10 +23,10 @@ fun row(index: Int, size: Int): Subject = Slice(size) { Coordinate(index, it) }
 
 fun column(index: Int, size: Int): Subject = Slice(size) { Coordinate(it, index) }
 
-fun square(index: Int, side: Int): Subject {
-    val rstart = index / side * side
-    val cstart = index % side * side
-    return Slice(side * side) {
-        Coordinate(rstart + it / side, cstart + it % side)
+fun box(index: Int, rows: Int, columns: Int): Subject {
+    val rstart = index / rows * rows
+    val cstart = index % rows * columns
+    return Slice(rows * columns) {
+        Coordinate(rstart + it / columns, cstart + it % columns)
     }
 }
