@@ -4,8 +4,6 @@ class Rule(val subjects: List<Subject>, val check: Check)
 
 data class Subject(val coordinates: List<Coordinate>)
 
-interface Check {
-    fun check(cellGroup: List<Pair<Coordinate, Cell>>): Boolean
-}
+typealias Check = (cellGroup: List<Pair<Coordinate, Cell>>) -> Boolean
 
 data class Coordinate(val row: Int, val col: Int)

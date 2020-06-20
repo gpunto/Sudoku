@@ -13,7 +13,7 @@ internal class InRangeTest : StringSpec({
             val group = ns.map { Coordinate(0, 0) to Fixed(it) }
             val range = rangeStart..rangeEnd
 
-            InRange(range).check(group) shouldBe ns.all(range::contains)
+            inRange(range)(group) shouldBe ns.all(range::contains)
         }
     }
 })
