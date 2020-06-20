@@ -10,6 +10,6 @@ fun sudoku(rows: Int, columns: Int): Rule {
 
     return Rule(
         rs + cs + bs,
-        and(InRange(1..(side * side)), Unique())
+        and(inRange(1..(side * side)), unique)
     )
 }

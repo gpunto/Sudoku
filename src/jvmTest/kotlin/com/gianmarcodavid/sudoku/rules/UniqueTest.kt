@@ -12,7 +12,7 @@ internal class UniqueTest : StringSpec({
         checkAll { ns: List<Int> ->
             val group = ns.map { Coordinate(0, 0) to Fixed(it) }
 
-            Unique().check(group) shouldBe (ns.size == ns.distinct().size)
+            unique(group) shouldBe (ns.size == ns.distinct().size)
         }
     }
 
