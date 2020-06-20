@@ -19,14 +19,17 @@ fun sudoku(rows: Int, columns: Int): Rule {
 
 fun and(vararg operands: Check): Check = And(operands.toList())
 
-fun row(index: Int, size: Int): Subject = Slice(size) { Coordinate(index, it) }
+fun row(index: Int, size: Int): Subject = slice(size) { Coordinate(index, it) }
 
-fun column(index: Int, size: Int): Subject = Slice(size) { Coordinate(it, index) }
+fun column(index: Int, size: Int): Subject = slice(size) { Coordinate(it, index) }
 
 fun box(index: Int, rows: Int, columns: Int): Subject {
     val rstart = index / rows * rows
     val cstart = index % rows * columns
-    return Slice(rows * columns) {
+    return slice(rows * columns) {
         Coordinate(rstart + it / columns, cstart + it % columns)
     }
 }
+
+private fun slice(size: Int, coordinate: (Int) -> Coordinate) =
+    Subject(List(size, coordinate))

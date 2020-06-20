@@ -2,9 +2,7 @@ package com.gianmarcodavid.sudoku
 
 class Rule(val subjects: List<Subject>, val check: Check)
 
-interface Subject {
-    val coordinates: List<Coordinate>
-}
+data class Subject(val coordinates: List<Coordinate>)
 
 interface Check {
     fun check(cellGroup: List<Pair<Coordinate, Cell>>): Boolean
