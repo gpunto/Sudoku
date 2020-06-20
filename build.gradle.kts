@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     kotlin("multiplatform") version "1.3.72"
@@ -15,8 +17,17 @@ dependencies {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
 kotlin {
     /* Targets configuration omitted. 
     *  To find out how to configure the targets, please follow the link:
@@ -34,7 +45,9 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-
+                implementation("io.kotest:kotest-assertions-core:4.0.6")
+                implementation("io.kotest:kotest-runner-junit5:4.0.6")
+                implementation("io.kotest:kotest-property:4.0.6")
             }
         }
         val jvmMain by getting {
@@ -46,6 +59,9 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
+                implementation("io.kotest:kotest-runner-junit5-jvm:4.0.6")
+                implementation("io.kotest:kotest-assertions-core-jvm:4.0.6")
+                implementation("io.kotest:kotest-property-jvm:4.0.6")
             }
         }
     }
