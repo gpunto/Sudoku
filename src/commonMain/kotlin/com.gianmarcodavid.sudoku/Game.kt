@@ -1,4 +1,4 @@
 package com.gianmarcodavid.sudoku
 
-data class Game(val board: Board, val rules: List<Rule>)
+data class Game<T>(val board: Board<T>, val rules: List<Rule<T>>)
 

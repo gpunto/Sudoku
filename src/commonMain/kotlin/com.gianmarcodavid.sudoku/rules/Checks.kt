@@ -4,24 +4,24 @@ import com.gianmarcodavid.sudoku.Check
 import com.gianmarcodavid.sudoku.Fixed
 import com.gianmarcodavid.sudoku.Open
 
-fun and(vararg operands: Check): Check = { cellGroup -> operands.all { it(cellGroup) } }
+fun <T> and(vararg operands: Check<T>): Check<T> = { cellGroup -> operands.all { it(cellGroup) } }
 
-val unique: Check = { cellGroup ->
-    val encountered = mutableSetOf<Int>()
+fun <T> unique(): Check<T> = { cellGroup ->
+    val encountered = mutableSetOf<T>()
 
     cellGroup.forEach { (_, cell) ->
-        (cell as? Fixed)?.n?.let {
+        (cell as? Fixed)?.value?.let {
             if (it in encountered) false
-            else encountered += cell.n
+            else encountered += cell.value
         }
     }
     true
 }
 
-fun inRange(range: IntRange): Check = { cellGroup ->
+fun <T : Comparable<T>> inRange(range: ClosedRange<T>): Check<T> = { cellGroup ->
     cellGroup.all { (_, cell) ->
         when (cell) {
-            is Fixed -> cell.n in range
+            is Fixed -> cell.value in range
             is Open -> true
         }
     }

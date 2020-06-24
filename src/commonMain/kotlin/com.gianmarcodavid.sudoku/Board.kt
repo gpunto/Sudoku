@@ -1,7 +1,7 @@
 package com.gianmarcodavid.sudoku
 
-data class Board(val cells: List<List<Cell>>)
+data class Board<T>(val cells: List<List<Cell<T>>>)
 
-sealed class Cell
-data class Fixed(val n: Int) : Cell()
-data class Open(val ns: List<Int>) : Cell()
+sealed class Cell<T>
+data class Fixed<T>(val value: T) : Cell<T>()
+object Open : Cell<Nothing>()

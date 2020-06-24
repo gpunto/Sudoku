@@ -9,7 +9,7 @@ internal class AndTest : StringSpec({
 
     "true if all return true" {
         checkAll { bs: List<Boolean> ->
-            val checks = bs.map(fun(b: Boolean): Check = { b }).toTypedArray()
+            val checks = bs.map(fun(b: Boolean): Check<Int> = { b }).toTypedArray()
 
             and(*checks)(emptyList()) shouldBe bs.all { it }
         }
